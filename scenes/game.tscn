@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://bcx75l7iumm4w" path="res://scenes/click_area.tscn" id="1_uwrxv"]
 [ext_resource type="Theme" uid="uid://ex74tbocfu1v" path="res://assets/regular.tres" id="3_iywne"]
 [ext_resource type="Script" uid="uid://o57jkj0vhcf2" path="res://scripts/score_label.gd" id="3_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://bney05yebnvtf" path="res://scenes/upgrade_button.tscn" id="5_0tnpc"]
 [ext_resource type="Theme" uid="uid://bh3eax65q363d" path="res://assets/buttons.tres" id="5_gee14"]
-[ext_resource type="Script" uid="uid://cs42wdp3bqeri" path="res://scripts/upgrade_button.gd" id="5_p57ef"]
 [ext_resource type="Script" uid="uid://2qlblr5nmfqb" path="res://scripts/income_button.gd" id="6_u5sy4"]
 [ext_resource type="Script" uid="uid://cwf1y640bo7oa" path="res://scripts/notification_label.gd" id="7_gee14"]
 
@@ -60,11 +60,9 @@ grow_vertical = 0
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="SpoonButton" type="Button" parent="HUD/Control/VBoxContainer" unique_id=2024642242]
+[node name="SpoonButton" parent="HUD/Control/VBoxContainer" unique_id=685758972 instance=ExtResource("5_0tnpc")]
 layout_mode = 2
-theme = ExtResource("5_gee14")
-text = "Spoon upgrade:"
-script = ExtResource("5_p57ef")
+upgrade_id = "Spoon"
 
 [node name="ChickenButton" type="Button" parent="HUD/Control/VBoxContainer" unique_id=1029063155]
 layout_mode = 2
@@ -89,9 +87,8 @@ script = ExtResource("7_gee14")
 [connection signal="offline_notification" from="." to="HUD/Control/NotificationContainer/NotificationLabel" method="_on_game_offline_notification"]
 [connection signal="update_score" from="." to="HUD/Control/ScoreContainer/ScoreLabel" method="_on_game_update_score"]
 [connection signal="update_upg_chicken" from="." to="HUD/Control/VBoxContainer/ChickenButton" method="_on_game_update_upg_chicken"]
-[connection signal="update_upg_click" from="." to="HUD/Control/VBoxContainer/SpoonButton" method="_on_game_update_upg_click"]
 [connection signal="clicked" from="ClickArea" to="." method="_on_click_area_clicked"]
 [connection signal="timeout" from="IncomeTimer" to="." method="_on_income_timer_timeout"]
-[connection signal="pressed" from="HUD/Control/VBoxContainer/SpoonButton" to="." method="_on_upgrade_button_pressed"]
 [connection signal="pressed" from="HUD/Control/VBoxContainer/SpoonButton" to="HUD/Control/VBoxContainer/SpoonButton" method="_on_pressed"]
+[connection signal="upgrade_clicked" from="HUD/Control/VBoxContainer/SpoonButton" to="." method="_on_upgrade_clicked"]
 [connection signal="pressed" from="HUD/Control/VBoxContainer/ChickenButton" to="." method="_on_income_button_pressed"]

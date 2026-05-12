@@ -59,6 +59,9 @@ func _ready() -> void:
 	emit_signal("update_score", score)
 	emit_signal("update_upg_click", click_cost)
 	emit_signal("update_upg_chicken", chicken_cost)
+	
+	UpgradeManager.connect("multiplier_changed", _on_multiplier_changed)
+	UpgradeManager.connect("income_changed", _on_income_changed)
 
 
 func calculate_offline_income():
@@ -84,14 +87,8 @@ func _on_income_timer_timeout() -> void:
 	emit_signal("update_score", score)
 
 
-func _on_upgrade_button_pressed() -> void:
-	if score >= click_cost:
-		score -= click_cost
-		multiplier = multiplier + 1
-		click_cost = round(click_cost * 1.55)
-		
-		emit_signal("update_score", score)
-		emit_signal("update_upg_click", click_cost)
+func _on_upgrade_button_pressed(upgrade_id: String) -> void:
+	print(upgrade_id)
 
 
 func _on_income_button_pressed() -> void:
@@ -105,3 +102,21 @@ func _on_income_button_pressed() -> void:
 		
 		if income_timer.is_stopped():
 			income_timer.start()
+
+
+func _on_upgrade_clicked(upgrade_id: Variant) -> void:
+	var cost = UpgradeManager.get_cost(upgrade_id)
+	
+	if score >= cost:
+		score -= cost
+		
+		UpgradeManager.buy_upgrade(upgrade_id)
+
+
+func _on_multiplier_changed(new_multiplier: int):
+	multiplier = new_multiplier
+	print(multiplier)
+
+
+func _on_income_changed(new_income: int):
+	income_per_second = new_income

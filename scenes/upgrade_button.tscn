@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bney05yebnvtf"]
+
+[ext_resource type="Theme" uid="uid://bh3eax65q363d" path="res://assets/buttons.tres" id="1_mdhk6"]
+[ext_resource type="Script" uid="uid://cs42wdp3bqeri" path="res://scripts/upgrade_button.gd" id="1_vd32k"]
+
+[node name="UpgradeButton" type="Button" unique_id=685758972]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mdhk6")
+script = ExtResource("1_vd32k")
