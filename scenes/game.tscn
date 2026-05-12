@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://dr3iqxwpk2nw8"]
+
+[ext_resource type="Script" uid="uid://djevt5cnqfso6" path="res://scripts/game.gd" id="1_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://bcx75l7iumm4w" path="res://scenes/click_area.tscn" id="1_uwrxv"]
+[ext_resource type="Theme" uid="uid://ex74tbocfu1v" path="res://assets/regular.tres" id="3_iywne"]
+[ext_resource type="Script" uid="uid://o57jkj0vhcf2" path="res://scripts/score_label.gd" id="3_lbhrr"]
+[ext_resource type="Theme" uid="uid://bh3eax65q363d" path="res://assets/buttons.tres" id="5_gee14"]
+[ext_resource type="Script" uid="uid://cs42wdp3bqeri" path="res://scripts/upgrade_button.gd" id="5_p57ef"]
+[ext_resource type="Script" uid="uid://2qlblr5nmfqb" path="res://scripts/income_button.gd" id="6_u5sy4"]
+[ext_resource type="Script" uid="uid://cwf1y640bo7oa" path="res://scripts/notification_label.gd" id="7_gee14"]
+
+[node name="Game" type="Node2D" unique_id=37455140]
+script = ExtResource("1_lnu2h")
+metadata/_edit_vertical_guides_ = [360.0]
+metadata/_edit_horizontal_guides_ = [640.0]
+
+[node name="ClickArea" parent="." unique_id=1912344591 instance=ExtResource("1_uwrxv")]
+position = Vector2(360, 640)
+scale = Vector2(2, 2)
+
+[node name="IncomeTimer" type="Timer" parent="." unique_id=1843388918]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=919551883]
+
+[node name="Control" type="Control" parent="HUD" unique_id=922275073]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ScoreContainer" type="MarginContainer" parent="HUD/Control" unique_id=3719254]
+layout_mode = 0
+offset_top = 128.0
+offset_right = 221.0
+offset_bottom = 256.0
+theme_override_constants/margin_left = 16
+
+[node name="ScoreLabel" type="Label" parent="HUD/Control/ScoreContainer" unique_id=1802842391]
+layout_mode = 2
+theme = ExtResource("3_iywne")
+text = "Score: "
+vertical_alignment = 1
+script = ExtResource("3_lbhrr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control" unique_id=1733256299]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -170.5
+offset_top = -154.0
+offset_right = 170.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="SpoonButton" type="Button" parent="HUD/Control/VBoxContainer" unique_id=2024642242]
+layout_mode = 2
+theme = ExtResource("5_gee14")
+text = "Spoon upgrade:"
+script = ExtResource("5_p57ef")
+
+[node name="ChickenButton" type="Button" parent="HUD/Control/VBoxContainer" unique_id=1029063155]
+layout_mode = 2
+theme = ExtResource("5_gee14")
+text = "Chicken Ryaba: "
+script = ExtResource("6_u5sy4")
+
+[node name="NotificationContainer" type="MarginContainer" parent="HUD/Control" unique_id=1429628513]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 128.0
+grow_horizontal = 2
+
+[node name="NotificationLabel" type="Label" parent="HUD/Control/NotificationContainer" unique_id=1590442234]
+layout_mode = 2
+theme = ExtResource("3_iywne")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_gee14")
+
+[connection signal="offline_notification" from="." to="HUD/Control/NotificationContainer/NotificationLabel" method="_on_game_offline_notification"]
+[connection signal="update_score" from="." to="HUD/Control/ScoreContainer/ScoreLabel" method="_on_game_update_score"]
+[connection signal="update_upg_chicken" from="." to="HUD/Control/VBoxContainer/ChickenButton" method="_on_game_update_upg_chicken"]
+[connection signal="update_upg_click" from="." to="HUD/Control/VBoxContainer/SpoonButton" method="_on_game_update_upg_click"]
+[connection signal="clicked" from="ClickArea" to="." method="_on_click_area_clicked"]
+[connection signal="timeout" from="IncomeTimer" to="." method="_on_income_timer_timeout"]
+[connection signal="pressed" from="HUD/Control/VBoxContainer/SpoonButton" to="." method="_on_upgrade_button_pressed"]
+[connection signal="pressed" from="HUD/Control/VBoxContainer/SpoonButton" to="HUD/Control/VBoxContainer/SpoonButton" method="_on_pressed"]
+[connection signal="pressed" from="HUD/Control/VBoxContainer/ChickenButton" to="." method="_on_income_button_pressed"]

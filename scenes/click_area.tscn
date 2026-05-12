@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bcx75l7iumm4w"]
+
+[ext_resource type="Script" uid="uid://doperxucwlta8" path="res://scripts/click_area.gd" id="1_sy03f"]
+[ext_resource type="Texture2D" uid="uid://dxkxd423vjtsj" path="res://assets/art/sprites/doll_2.png" id="2_sy03f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sy03f"]
+radius = 64.0
+
+[node name="ClickArea" type="Area2D" unique_id=1912344591]
+script = ExtResource("1_sy03f")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=292772745]
+texture = ExtResource("2_sy03f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1266555367]
+shape = SubResource("CircleShape2D_sy03f")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

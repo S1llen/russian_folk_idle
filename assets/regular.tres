@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://ex74tbocfu1v"]
+
+[ext_resource type="FontFile" uid="uid://2y32jhv3c64w" path="res://assets/fonts/Montserrat-Regular.ttf" id="1_qh2sc"]
+
+[resource]
+default_font = ExtResource("1_qh2sc")
+default_font_size = 36
