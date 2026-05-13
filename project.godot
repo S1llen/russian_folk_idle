@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SaveManager="*uid://b6w3ki0osvpuv"
 UpgradeManager="*uid://dlh2mhff6ji7e"
+SaveManager="*uid://b6w3ki0osvpuv"
 
 [display]
 

@@ -1,19 +1,20 @@
 extends Button
 
 
-signal upgrade_clicked(upgrade_id)
+signal upgrade_clicked(button_id)
 
 
-@export var upgrade_id : String
+@export var button_id : String
 
 
 func _ready() -> void:
-	UpgradeManager.connect("upgrade_purchased", _on_update_text)
+	UpgradeManager.connect("update_button_text", _on_update_text)
 
 
 func _on_pressed() -> void:
-	emit_signal("upgrade_clicked", upgrade_id)
+	emit_signal("upgrade_clicked", button_id)
 
 
-func _on_update_text(upgrade_text: String, new_cost: int) -> void:
-	text = upgrade_text + " " + str(new_cost)
+func _on_update_text(upgrade_name: String, new_cost: int) -> void:
+	if button_id == upgrade_name:
+		text = upgrade_name + " " + str(new_cost)

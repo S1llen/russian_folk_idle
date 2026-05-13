@@ -1,7 +1,7 @@
 extends Node
 
 
-signal upgrade_purchased(upgrade_id : String, cost : int)
+signal update_button_text(upgrade_name : String, cost : int)
 signal multiplier_changed(new_multiplier : int)
 signal income_changed(new_income : int)
 
@@ -10,10 +10,10 @@ var upgrades = {}
 
 
 func _ready() -> void:
-	initialize_upgrades()
+	init_default_upgrades()
 
 
-func initialize_upgrades():
+func init_default_upgrades():
 	upgrades = {
 		"Spoon": {
 			"id": "spoon",
@@ -43,7 +43,6 @@ func initialize_upgrades():
 func get_cost(upgrade_id: String):
 	return upgrades[upgrade_id].get("current_cost")
 
-
 func buy_upgrade(upgrade_id: String):
 	if not upgrades.has(upgrade_id):
 		return
@@ -54,9 +53,28 @@ func buy_upgrade(upgrade_id: String):
 	upgrade["current_cost"] = round(upgrade["current_cost"] * upgrade["cost_rate"])
 	upgrade["value"] = upgrade["value"] + upgrade["value_growth"]
 	
-	emit_signal("upgrade_purchased", upgrade_id, upgrade["current_cost"])
+	emit_signal("update_button_text", upgrade_id, upgrade["current_cost"])
 	
 	if upgrade["type"] == "multiplier":
 		emit_signal("multiplier_changed", upgrade["value"])
 	elif upgrade["type"] == "income":
 		emit_signal("income_changed", upgrade["value"])
+
+
+# Save
+func save_upgrades():
+	return upgrades
+
+
+# Load
+func load_upgrades(data: Dictionary):
+	if data and not data.is_empty():
+		upgrades = data.duplicate(true)
+	
+
+func refresh_ui():
+	for id in upgrades:
+		var upgrade_name : String = id
+		var cost : int = upgrades[id].get("current_cost")
+		
+		emit_signal("update_button_text", upgrade_name, cost)
