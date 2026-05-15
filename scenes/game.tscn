@@ -13,7 +13,7 @@ metadata/_edit_vertical_guides_ = [360.0]
 metadata/_edit_horizontal_guides_ = [640.0]
 
 [node name="ClickArea" parent="." unique_id=1912344591 instance=ExtResource("1_uwrxv")]
-position = Vector2(360, 640)
+position = Vector2(190, 632)
 scale = Vector2(2, 2)
 
 [node name="IncomeTimer" type="Timer" parent="." unique_id=1843388918]
@@ -29,6 +29,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ScoreContainer" type="MarginContainer" parent="HUD/Control" unique_id=3719254]
 layout_mode = 0
@@ -46,16 +47,16 @@ script = ExtResource("3_lbhrr")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control" unique_id=1733256299]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -170.5
-offset_top = -154.0
-offset_right = 170.5
-grow_horizontal = 2
-grow_vertical = 0
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -341.0
+offset_top = -77.0
+offset_bottom = 77.0
+grow_horizontal = 0
+grow_vertical = 2
 theme_override_constants/separation = 16
 alignment = 1
 
@@ -63,9 +64,21 @@ alignment = 1
 layout_mode = 2
 button_id = "Spoon"
 
-[node name="UpgradeButton" parent="HUD/Control/VBoxContainer" unique_id=656438729 instance=ExtResource("5_0tnpc")]
+[node name="SamovarButton" parent="HUD/Control/VBoxContainer" unique_id=1661208847 instance=ExtResource("5_0tnpc")]
 layout_mode = 2
-button_id = "Ryaba"
+button_id = "Samovar"
+
+[node name="FishermanButton" parent="HUD/Control/VBoxContainer" unique_id=881576425 instance=ExtResource("5_0tnpc")]
+layout_mode = 2
+button_id = "Fisherman"
+
+[node name="ChickenButton" parent="HUD/Control/VBoxContainer" unique_id=656438729 instance=ExtResource("5_0tnpc")]
+layout_mode = 2
+button_id = "Chicken"
+
+[node name="FirebirdButton" parent="HUD/Control/VBoxContainer" unique_id=505729559 instance=ExtResource("5_0tnpc")]
+layout_mode = 2
+button_id = "Firebird"
 
 [node name="NotificationContainer" type="MarginContainer" parent="HUD/Control" unique_id=1429628513]
 layout_mode = 1
@@ -87,5 +100,11 @@ script = ExtResource("7_gee14")
 [connection signal="timeout" from="IncomeTimer" to="." method="_on_income_timer_timeout"]
 [connection signal="pressed" from="HUD/Control/VBoxContainer/SpoonButton" to="HUD/Control/VBoxContainer/SpoonButton" method="_on_pressed"]
 [connection signal="upgrade_clicked" from="HUD/Control/VBoxContainer/SpoonButton" to="." method="_on_upgrade_clicked"]
-[connection signal="pressed" from="HUD/Control/VBoxContainer/UpgradeButton" to="HUD/Control/VBoxContainer/UpgradeButton" method="_on_pressed"]
-[connection signal="upgrade_clicked" from="HUD/Control/VBoxContainer/UpgradeButton" to="." method="_on_upgrade_clicked"]
+[connection signal="pressed" from="HUD/Control/VBoxContainer/SamovarButton" to="HUD/Control/VBoxContainer/SamovarButton" method="_on_pressed"]
+[connection signal="upgrade_clicked" from="HUD/Control/VBoxContainer/SamovarButton" to="." method="_on_upgrade_clicked"]
+[connection signal="pressed" from="HUD/Control/VBoxContainer/FishermanButton" to="HUD/Control/VBoxContainer/FishermanButton" method="_on_pressed"]
+[connection signal="upgrade_clicked" from="HUD/Control/VBoxContainer/FishermanButton" to="." method="_on_upgrade_clicked"]
+[connection signal="pressed" from="HUD/Control/VBoxContainer/ChickenButton" to="HUD/Control/VBoxContainer/ChickenButton" method="_on_pressed"]
+[connection signal="upgrade_clicked" from="HUD/Control/VBoxContainer/ChickenButton" to="." method="_on_upgrade_clicked"]
+[connection signal="pressed" from="HUD/Control/VBoxContainer/FirebirdButton" to="HUD/Control/VBoxContainer/FirebirdButton" method="_on_pressed"]
+[connection signal="upgrade_clicked" from="HUD/Control/VBoxContainer/FirebirdButton" to="." method="_on_upgrade_clicked"]
