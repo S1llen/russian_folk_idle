@@ -5,6 +5,7 @@
 [ext_resource type="Theme" uid="uid://ex74tbocfu1v" path="res://assets/regular.tres" id="3_iywne"]
 [ext_resource type="Script" uid="uid://o57jkj0vhcf2" path="res://scripts/score_label.gd" id="3_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bney05yebnvtf" path="res://scenes/upgrade_button.tscn" id="5_0tnpc"]
+[ext_resource type="Script" uid="uid://p46413y1ddmv" path="res://scripts/income_label.gd" id="5_u5sy4"]
 [ext_resource type="Script" uid="uid://cwf1y640bo7oa" path="res://scripts/notification_label.gd" id="7_gee14"]
 
 [node name="Game" type="Node2D" unique_id=37455140]
@@ -38,12 +39,20 @@ offset_right = 221.0
 offset_bottom = 256.0
 theme_override_constants/margin_left = 16
 
-[node name="ScoreLabel" type="Label" parent="HUD/Control/ScoreContainer" unique_id=1802842391]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control/ScoreContainer" unique_id=217717167]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="HUD/Control/ScoreContainer/VBoxContainer" unique_id=1802842391]
 layout_mode = 2
 theme = ExtResource("3_iywne")
 text = "Score: "
 vertical_alignment = 1
 script = ExtResource("3_lbhrr")
+
+[node name="IncomeLabel" type="Label" parent="HUD/Control/ScoreContainer/VBoxContainer" unique_id=1482845871]
+layout_mode = 2
+theme = ExtResource("3_iywne")
+script = ExtResource("5_u5sy4")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control" unique_id=1733256299]
 layout_mode = 1
@@ -95,7 +104,8 @@ vertical_alignment = 1
 script = ExtResource("7_gee14")
 
 [connection signal="offline_notification" from="." to="HUD/Control/NotificationContainer/NotificationLabel" method="_on_game_offline_notification"]
-[connection signal="update_score" from="." to="HUD/Control/ScoreContainer/ScoreLabel" method="_on_game_update_score"]
+[connection signal="update_income" from="." to="HUD/Control/ScoreContainer/VBoxContainer/IncomeLabel" method="_on_game_update_income"]
+[connection signal="update_score" from="." to="HUD/Control/ScoreContainer/VBoxContainer/ScoreLabel" method="_on_game_update_score"]
 [connection signal="clicked" from="ClickArea" to="." method="_on_click_area_clicked"]
 [connection signal="timeout" from="IncomeTimer" to="." method="_on_income_timer_timeout"]
 [connection signal="pressed" from="HUD/Control/VBoxContainer/SpoonButton" to="HUD/Control/VBoxContainer/SpoonButton" method="_on_pressed"]

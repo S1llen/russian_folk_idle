@@ -2,6 +2,7 @@ extends Node2D
 
 
 signal update_score(new_score)
+signal update_income(new_income)
 signal offline_notification(income_amount, offline_time)
 
 
@@ -51,6 +52,7 @@ func _ready() -> void:
 	
 	# UI update
 	emit_signal("update_score", score)
+	emit_signal("update_income", income)
 	UpgradeManager.refresh_ui()
 
 func calculate_offline_income():
@@ -90,7 +92,9 @@ func _on_multiplier_changed(new_multiplier: int):
 
 
 func _on_income_changed(new_income: int):
-	income = new_income
+	income += new_income
+	
+	emit_signal("update_income", income)
 	
 	if income > 0:
 		# Start income timer
