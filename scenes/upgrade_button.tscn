@@ -4,10 +4,7 @@
 [ext_resource type="Script" uid="uid://cs42wdp3bqeri" path="res://scripts/upgrade_button.gd" id="1_vd32k"]
 
 [node name="UpgradeButton" type="Button" unique_id=685758972]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 8.0
+offset_bottom = 8.0
 theme = ExtResource("1_mdhk6")
 script = ExtResource("1_vd32k")

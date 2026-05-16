@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://byrh8hd3dd34f"]
+
+[ext_resource type="PackedScene" uid="uid://bney05yebnvtf" path="res://scenes/upgrade_button.tscn" id="1_lx5au"]
+[ext_resource type="Theme" uid="uid://bh3eax65q363d" path="res://assets/buttons.tres" id="2_xfvoa"]
+
+[node name="Shop" type="Control" unique_id=1507385853]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UpgradesContainer" type="VBoxContainer" parent="." unique_id=1632023919]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.5
+offset_top = -77.0
+offset_right = 170.5
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="SpoonButton" parent="UpgradesContainer" unique_id=685758972 instance=ExtResource("1_lx5au")]
+layout_mode = 2
+button_id = "Spoon"
+
+[node name="SamovarButton" parent="UpgradesContainer" unique_id=1814294666 instance=ExtResource("1_lx5au")]
+layout_mode = 2
+button_id = "Samovar"
+
+[node name="FishermanButton" parent="UpgradesContainer" unique_id=1705787789 instance=ExtResource("1_lx5au")]
+layout_mode = 2
+button_id = "Fisherman"
+
+[node name="ChickenButton" parent="UpgradesContainer" unique_id=1058684836 instance=ExtResource("1_lx5au")]
+layout_mode = 2
+button_id = "Chicken"
+
+[node name="FirebirdButton" parent="UpgradesContainer" unique_id=944845505 instance=ExtResource("1_lx5au")]
+layout_mode = 2
+button_id = "Firebird"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=601202901]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.90000004
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BackButton" type="Button" parent="MarginContainer" unique_id=1281253045]
+layout_mode = 2
+theme = ExtResource("2_xfvoa")
+text = "Back"
+
+[connection signal="pressed" from="UpgradesContainer/SpoonButton" to="UpgradesContainer/SpoonButton" method="_on_pressed"]
+[connection signal="pressed" from="UpgradesContainer/SamovarButton" to="UpgradesContainer/SamovarButton" method="_on_pressed"]
+[connection signal="pressed" from="UpgradesContainer/FishermanButton" to="UpgradesContainer/FishermanButton" method="_on_pressed"]
+[connection signal="pressed" from="UpgradesContainer/ChickenButton" to="UpgradesContainer/ChickenButton" method="_on_pressed"]
+[connection signal="pressed" from="UpgradesContainer/FirebirdButton" to="UpgradesContainer/FirebirdButton" method="_on_pressed"]
