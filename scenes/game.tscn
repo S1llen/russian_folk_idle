@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://djevt5cnqfso6" path="res://scripts/game.gd" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://bcx75l7iumm4w" path="res://scenes/click_area.tscn" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://c3sdeuawo6vrq" path="res://scripts/screens.gd" id="3_0tnpc"]
 [ext_resource type="Theme" uid="uid://ex74tbocfu1v" path="res://assets/regular.tres" id="3_iywne"]
 [ext_resource type="Script" uid="uid://o57jkj0vhcf2" path="res://scripts/score_label.gd" id="3_lbhrr"]
 [ext_resource type="Script" uid="uid://p46413y1ddmv" path="res://scripts/income_label.gd" id="5_u5sy4"]
@@ -14,7 +15,7 @@ script = ExtResource("1_lnu2h")
 metadata/_edit_vertical_guides_ = [360.0]
 metadata/_edit_horizontal_guides_ = [640.0]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=442486184]
+[node name="Camera" type="Camera2D" parent="." unique_id=442486184]
 anchor_mode = 0
 
 [node name="ClickArea" parent="." unique_id=1912344591 instance=ExtResource("1_uwrxv")]
@@ -26,7 +27,7 @@ autostart = true
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=919551883]
 
-[node name="Main" type="Control" parent="HUD" unique_id=922275073]
+[node name="Screens" type="Control" parent="HUD" unique_id=922275073]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,45 +35,53 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-metadata/_edit_lock_ = true
+script = ExtResource("3_0tnpc")
 
-[node name="ScoreContainer" type="MarginContainer" parent="HUD/Main" unique_id=3719254]
+[node name="MainScreen" type="Control" parent="HUD/Screens" unique_id=2000747747]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreContainer" type="MarginContainer" parent="HUD/Screens/MainScreen" unique_id=3719254]
 layout_mode = 0
 offset_top = 128.0
 offset_right = 221.0
 offset_bottom = 256.0
 theme_override_constants/margin_left = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Main/ScoreContainer" unique_id=217717167]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Screens/MainScreen/ScoreContainer" unique_id=217717167]
 layout_mode = 2
 
-[node name="ScoreLabel" type="Label" parent="HUD/Main/ScoreContainer/VBoxContainer" unique_id=1802842391]
+[node name="ScoreLabel" type="Label" parent="HUD/Screens/MainScreen/ScoreContainer/VBoxContainer" unique_id=1802842391]
 layout_mode = 2
 theme = ExtResource("3_iywne")
 text = "Score: "
 vertical_alignment = 1
 script = ExtResource("3_lbhrr")
 
-[node name="IncomeLabel" type="Label" parent="HUD/Main/ScoreContainer/VBoxContainer" unique_id=1482845871]
+[node name="IncomeLabel" type="Label" parent="HUD/Screens/MainScreen/ScoreContainer/VBoxContainer" unique_id=1482845871]
 layout_mode = 2
 theme = ExtResource("3_iywne")
 script = ExtResource("5_u5sy4")
 
-[node name="NotificationContainer" type="MarginContainer" parent="HUD/Main" unique_id=1429628513]
+[node name="NotificationContainer" type="MarginContainer" parent="HUD/Screens/MainScreen" unique_id=1429628513]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 128.0
 grow_horizontal = 2
 
-[node name="NotificationLabel" type="Label" parent="HUD/Main/NotificationContainer" unique_id=1590442234]
+[node name="NotificationLabel" type="Label" parent="HUD/Screens/MainScreen/NotificationContainer" unique_id=1590442234]
 layout_mode = 2
 theme = ExtResource("3_iywne")
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("7_gee14")
 
-[node name="StatsContainer" type="MarginContainer" parent="HUD/Main" unique_id=1466760514]
+[node name="StatsContainer" type="MarginContainer" parent="HUD/Screens/MainScreen" unique_id=1466760514]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.90000004
@@ -80,12 +89,12 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_vertical = 0
 
-[node name="StatsButton" type="Button" parent="HUD/Main/StatsContainer" unique_id=1474055087]
+[node name="StatsButton" type="Button" parent="HUD/Screens/MainScreen/StatsContainer" unique_id=1474055087]
 layout_mode = 2
 theme = ExtResource("7_0tnpc")
 text = "Stats"
 
-[node name="ShopContainer" type="MarginContainer" parent="HUD/Main" unique_id=1146704987]
+[node name="ShopContainer" type="MarginContainer" parent="HUD/Screens/MainScreen" unique_id=1146704987]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -96,18 +105,21 @@ offset_top = -7.6800537
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="ShopButton" type="Button" parent="HUD/Main/ShopContainer" unique_id=144623429]
+[node name="ShopButton" type="Button" parent="HUD/Screens/MainScreen/ShopContainer" unique_id=144623429]
 layout_mode = 2
 theme = ExtResource("7_0tnpc")
 text = "Shop"
 
-[node name="Shop" parent="HUD" unique_id=1507385853 instance=ExtResource("8_vtaks")]
+[node name="ShopScreen" parent="HUD/Screens" unique_id=1507385853 instance=ExtResource("8_vtaks")]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 2.0
 
-[connection signal="offline_notification" from="." to="HUD/Main/NotificationContainer/NotificationLabel" method="_on_game_offline_notification"]
-[connection signal="update_income" from="." to="HUD/Main/ScoreContainer/VBoxContainer/IncomeLabel" method="_on_game_update_income"]
-[connection signal="update_score" from="." to="HUD/Main/ScoreContainer/VBoxContainer/ScoreLabel" method="_on_game_update_score"]
+[connection signal="offline_notification" from="." to="HUD/Screens/MainScreen/NotificationContainer/NotificationLabel" method="_on_game_offline_notification"]
+[connection signal="update_income" from="." to="HUD/Screens/MainScreen/ScoreContainer/VBoxContainer/IncomeLabel" method="_on_game_update_income"]
+[connection signal="update_score" from="." to="HUD/Screens/MainScreen/ScoreContainer/VBoxContainer/ScoreLabel" method="_on_game_update_score"]
 [connection signal="clicked" from="ClickArea" to="." method="_on_click_area_clicked"]
 [connection signal="timeout" from="IncomeTimer" to="." method="_on_income_timer_timeout"]
+[connection signal="pressed" from="HUD/Screens/MainScreen/StatsContainer/StatsButton" to="HUD/Screens" method="_on_screen_transition"]
+[connection signal="pressed" from="HUD/Screens/MainScreen/ShopContainer/ShopButton" to="HUD/Screens" method="_on_screen_transition"]
